@@ -56,11 +56,11 @@ public class PexesoGUI
     /// <param name="hraciPoleGUI">vstupní hrací pole z GUI</param>
     private void KontrolaVyhry(PictureBox[,] hraciPoleGUI)
     {
-        foreach (PictureBox obr in hraciPoleGUI)
+        foreach (PictureBox karta in hraciPoleGUI)
         {
-            if (obr != null)
+            if (karta != null)
             {
-                if (obr.Image == kryciKarta)
+                if (karta.Image == kryciKarta)
                     return;
             }
         }
