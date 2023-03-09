@@ -19,21 +19,6 @@ public class Pexeso
     }
 
     /// <summary>
-    /// Popis herních dvojic karet
-    /// </summary>
-    /// <param name="poleDvojic">pole dvojic karet</param>
-    /// <returns>vrátí pole popisu dvojic</returns>
-    private List<string> PopisDvojic(List<Image> poleDvojic)
-    {
-        List<string> popis = new List<string>();
-        for (int i = 0; i < poleDvojic.Count; i++)
-        {
-            popis.Add("karta" + i);
-        }
-        return popis;
-    }
-
-    /// <summary>
     /// Vytvoří herní pole z polí dvojic karet
     /// </summary>
     /// <param name="pocetDvojic">počet dvojic karet</param>
@@ -50,10 +35,9 @@ public class Pexeso
         }
 
         //přidělení popisků dvojicím
-        List<string> popisDvojic = PopisDvojic(dvojice);
         for (int i = 0; i < dvojice.Count; i++)
         {
-            dvojice[i].Tag = popisDvojic[i];
+            dvojice[i].Tag = "karta" + i;
         }
 
         //naplnění herního pole sloučením dvou polí dvojic

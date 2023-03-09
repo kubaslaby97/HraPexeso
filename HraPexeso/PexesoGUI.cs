@@ -12,7 +12,7 @@ public class PexesoGUI
     PictureBox[,] hraciPoleGUI;
     PictureBox[] poleGUI;
     PictureBox prvniVyber, druhyVyber;
-    Timer casovac = new Timer();
+    Timer casovacZakryti = new Timer();
 
     /// <summary>
     /// Konstruktor třídy PexesoGUI
@@ -53,14 +53,14 @@ public class PexesoGUI
     /// <summary>
     /// Kontrola, zda hráč vyhrál
     /// </summary>
-    /// <param name="hraciPole">vstupní hrací pole z GUI</param>
-    private void KontrolaVyhry(PictureBox[,] hraciPole)
+    /// <param name="hraciPoleGUI">vstupní hrací pole z GUI</param>
+    private void KontrolaVyhry(PictureBox[,] hraciPoleGUI)
     {
-        foreach (PictureBox pb in hraciPole)
+        foreach (PictureBox obr in hraciPoleGUI)
         {
-            if (pb != null)
+            if (obr != null)
             {
-                if (pb.Image == kryciKarta)
+                if (obr.Image == kryciKarta)
                     return;
             }
         }
@@ -74,28 +74,28 @@ public class PexesoGUI
     /// <param name="poleGUI">vstupní pole z GUI</param>
     private void KliknutiNaKarty(PictureBox[] poleGUI)
     {
-        foreach (PictureBox obr in poleGUI)
+        foreach (PictureBox karta in poleGUI)
         {
-            obr.Click += (s, e) =>
+            karta.Click += (s, e) =>
             {
-                PictureBox obrazek = (PictureBox)s;
+                PictureBox vybranaKarta = (PictureBox)s;
 
-                if (obrazek != null)
+                if (vybranaKarta != null)
                 {
-                    if (obrazek.Image == null)
+                    if (vybranaKarta.Image == null)
                         return;
 
                     if (prvniVyber == null)
                     {
-                        prvniVyber = obrazek;
+                        prvniVyber = vybranaKarta;
                         prvniVyber.Image = null;
-                        prvniVyber.Tag = obrazek.Tag;
+                        prvniVyber.Tag = vybranaKarta.Tag;
                         return;
                     }
 
-                    druhyVyber = obrazek;
+                    druhyVyber = vybranaKarta;
                     druhyVyber.Image = null;
-                    druhyVyber.Tag = obrazek.Tag;
+                    druhyVyber.Tag = vybranaKarta.Tag;
 
                     if (prvniVyber.Tag == druhyVyber.Tag)
                     {
@@ -105,7 +105,7 @@ public class PexesoGUI
                         return;
                     }
 
-                    casovac.Start();
+                    casovacZakryti.Start();
                 }
             };
         }
@@ -118,7 +118,8 @@ public class PexesoGUI
     /// <param name="e"></param>
     private void Timer_Tick(object sender, EventArgs e)
     {
-        casovac.Stop();
+        casovacZakryti.Stop();
+
         prvniVyber.Image = kryciKarta;
         druhyVyber.Image = kryciKarta;
 
@@ -146,9 +147,9 @@ public class PexesoGUI
     /// <summary>
     /// Vytvoří a následně zobrazí herní okno
     /// </summary>
-    /// <param name="ikona">hlavní ikona herního okna</param>
+    /// <param name="ikona">ikona herního okna</param>
     /// <param name="titulek">titulek herního okna</param>
-    /// <param name="zmenaVelikosti">možnost ruční změny velikosti okna</param>
+    /// <param name="zmenaVelikosti">možnost změny velikosti okna</param>
     /// <param name="minimalizace">zobrazení tlačítka minimalizace</param>
     /// <param name="maximalizace">zobrazení tlačítka maximalizace</param>
     /// <param name="velikostKarty">velikost karty v pixelech</param>
@@ -179,8 +180,8 @@ public class PexesoGUI
         {
             kryciKarta = Image.FromFile("obr\\vrsek.jpg");
             Pexeso pexeso = new Pexeso(kryciKarta, PoleSouboruDvojic());
-            casovac.Interval = casZakryti;
-            casovac.Tick += Timer_Tick;
+            casovacZakryti.Interval = casZakryti;
+            casovacZakryti.Tick += Timer_Tick;
             KliknutiNaKarty(poleGUI);
             HraciPoleGUI(poleGUI, pexeso.KryciPole(pocetRadku, pocetSloupcu), pexeso.HraciPole(pocetRadku, pocetSloupcu));
         };
@@ -202,15 +203,15 @@ public class PexesoGUI
 
         form.Controls.Add(panel);
         poleGUI = panel.Controls.OfType<PictureBox>().ToArray();
-        form.ShowDialog();
+        form.Show();
     }
 
     /// <summary>
     /// Zahájí hru Pexeso
     /// </summary>
-    /// <param name="ikona">hlavní ikona herního okna</param>
+    /// <param name="ikona">ikona herního okna</param>
     /// <param name="titulek">název herního okna</param>
-    /// <param name="zmenaVelikosti">možnost ruční změny velikosti okna</param>
+    /// <param name="zmenaVelikosti">možnost změny velikosti okna</param>
     /// <param name="minimalizace">zobrazení tlačítka minimalizace</param>
     /// <param name="maximalizace">zobrazení tlačítka maximalizace</param>
     /// <param name="velikostKarty">velikost karty v pixelech</param>
