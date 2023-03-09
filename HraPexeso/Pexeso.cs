@@ -70,7 +70,7 @@ public class Pexeso
     /// <returns>vrátí dvourozměrné hrací pole</returns>
     public Image[,] HraciPole(int pocetRadku, int pocetSloupcu)
     {
-        Image[,] pole = new Bitmap[pocetRadku, pocetSloupcu];
+        Image[,] pole = new Image[pocetRadku, pocetSloupcu];
         Random r = new Random();
         List<Image> herniPole = HerniPole((pocetRadku * pocetSloupcu) / 2);
 

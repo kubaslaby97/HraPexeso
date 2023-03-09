@@ -154,6 +154,9 @@ public class PexesoGUI
     /// Vytvoří a následně zobrazí herní okno
     /// </summary>
     /// <param name="titulek">titulek herního okna</param>
+    /// <param name="zmenaVelikosti">možnost ruční změny velikosti okna</param>
+    /// <param name="minimalizace">zobrazení tlačítka minimalizace</param>
+    /// <param name="maximalizace">zobrazení tlačítka maximalizace</param>
     /// <param name="velikostKarty">velikost karty v pixelech</param>
     private void ZobrazitHerniOkno(string titulek, bool zmenaVelikosti, bool minimalizace, bool maximalizace, int velikostKarty)
     {
