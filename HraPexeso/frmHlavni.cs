@@ -27,7 +27,7 @@ namespace HraPexeso
                 zmenaVelikosti = true;
 
             pexeso = new PexesoGUI((int)numRadky.Value, (int)numSloupce.Value, (int)numCasZakryti.Value);
-            pexeso.ZahajitHru(txtTitulek.Text, zmenaVelikosti, chkMinimalizace.Checked, chkMaximalizace.Checked, (int)numVelikostKarty.Value);
+            pexeso.ZahajitHru(this.Icon, txtTitulek.Text, zmenaVelikosti, chkMinimalizace.Checked, chkMaximalizace.Checked, (int)numVelikostKarty.Value);
         }
     }
 }
